@@ -249,7 +249,7 @@ def create_vehicle_trip(**args):
             request_funds(**funds_args)
             
         # If company vehicle, update vehicle status
-        if args.transporter == "In House":
+        if args.transporter_type == "In House":
             vehicle = frappe.get_doc("Vehicle", args.vehicle)
             vehicle.status = "In Trip"
             # vehicle.hidden_status = 2
