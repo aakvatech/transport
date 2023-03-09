@@ -129,13 +129,17 @@ frappe.ui.form.on('Requested Payments', {
 			frappe.set_route("query-report", "General Ledger");
 		}, __("View"));
 
-		let amount = 0;
-		frm.doc.accounts_approval.forEach((row) => {
-			amount += row.request_amount;
+		let amount_tsh = 0
+		let amount_usd = 0
+		frm.doc.accounts_approval.forEach((d) => {
+			if (d.request_currency == "TZS") {
+				amount_tsh += d.request_amount;
+			}
+			else if (d.request_currency == 'USD') {
+				amount_usd += d.request_amount;
+			}
 		});
-		if (amount > 0) {
-			frm.set_value('total_amount', amount);
-		}
+		frm.get_field("total_amount").wrapper.innerHTML = '<p class="text-muted small">Total Amount</p><b>USD ' + amount_usd.toLocaleString() + ' <br> TZS ' + amount_tsh.toLocaleString() + '</b>';
 	},
 
 	make_payment: function () {
