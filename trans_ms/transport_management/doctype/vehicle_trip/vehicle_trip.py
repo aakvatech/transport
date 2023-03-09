@@ -193,6 +193,12 @@ def create_vehicle_trip(**args):
         trip = frappe.get_doc("Vehicle Trip", existing_vehicle_trip)
         # doc.db_set("request_status", "open")
         # doc.db_set("modified", timestamp)
+        
+        # Update transport assignment
+        doc = frappe.get_doc(args.reference_doctype, args.reference_docname)
+        doc.created_trip = existing_vehicle_trip
+        doc.status = "Processed"
+        doc.save()
         return trip
     else:        
         cargo_details = frappe.get_doc("Cargo Details", args.cargo)
