@@ -229,15 +229,13 @@
   },
   {
    "fieldname": "total_amount",
-   "fieldtype": "Currency",
-   "label": "Total Amount",
-   "precision": "2",
-   "read_only": 1
+   "fieldtype": "HTML",
+   "label": "Total Amount"
   }
  ],
  "in_create": 1,
  "links": [],
- "modified": "2023-03-02 13:19:10.682418",
+ "modified": "2023-03-08 17:47:16.199999",
  "modified_by": "Administrator",
  "module": "Transport Management",
  "name": "Requested Payments",
