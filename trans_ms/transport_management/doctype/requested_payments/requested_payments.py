@@ -25,7 +25,7 @@ class RequestedPayments(Document):
 
     def get_all_children(self, parenttype=None):
         # For getting children
-        return self.get("payments_reference")
+        return self.get("payments_reference") or []
 
     def update_children(self):
         """update child tables"""
