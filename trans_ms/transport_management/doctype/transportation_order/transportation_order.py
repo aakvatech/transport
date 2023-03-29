@@ -330,14 +330,16 @@ def create_sales_invoice(doc, rows):
     item_row_per = []
     for row in rows:
         description = ""
+        trip_info = None
         if row["transporter_type"] == "In House":
             description += "<b>VEHICLE NUMBER: " + row["assigned_vehicle"]
+            trip_info = "<BR>TRIP: " + row["created_trip"]
         elif row["transporter_type"] == "Sub-Contractor":
             description += "<b>VEHICLE NUMBER: " + row["vehicle_plate_number"]
         if row["route"]:
             description += "<BR>ROUTE: " + row["route"]
-        if row["created_trip"] != "None" or row["created_trip"] != "":
-            description += "<BR>TRIP: " + row["created_trip"]
+        if trip_info:
+            description += trip_info
         item = frappe._dict({
                 "item_code": row["item"],
                 "qty": 1,
@@ -375,9 +377,10 @@ def create_sales_invoice(doc, rows):
     for item in doc.assign_transport:
         if item.name in [i["name"] for i in rows]:
             item.invoice = invoice.name
-            trip = frappe.get_doc("Vehicle Trip", item.created_trip)
-            trip.invoice_number = invoice.name
-            trip.save()
+            if item.transporter_type == "In House":
+                trip = frappe.get_doc("Vehicle Trip", item.created_trip)
+                trip.invoice_number = invoice.name
+                trip.save()
     doc.save()
            
         

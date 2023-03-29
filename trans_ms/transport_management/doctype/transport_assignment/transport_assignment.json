@@ -141,7 +141,7 @@
    "in_standard_filter": 1,
    "label": "Vehicle Plate Number",
    "mandatory_depends_on": "eval:doc.transporter_type == 'Sub-Contractor'",
-   "read_only": 1
+   "read_only_depends_on": "eval:doc.transporter_type == 'In House'"
   },
   {
    "depends_on": "eval:doc.transporter_type == 'In House'",
@@ -158,7 +158,7 @@
    "in_list_view": 1,
    "label": "Trailer Plate Number",
    "mandatory_depends_on": "eval:doc.transporter_type == 'Sub-Contractor'",
-   "read_only": 1
+   "read_only_depends_on": "eval:doc.transporter_type == 'In House'"
   },
   {
    "depends_on": "eval:doc.transporter_type == 'In House'",
@@ -415,7 +415,7 @@
  "is_submittable": 1,
  "istable": 1,
  "links": [],
- "modified": "2023-02-13 16:21:35.059005",
+ "modified": "2023-03-21 12:35:36.483928",
  "modified_by": "Administrator",
  "module": "Transport Management",
  "name": "Transport Assignment",
