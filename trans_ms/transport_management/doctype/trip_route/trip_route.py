@@ -13,11 +13,14 @@ class TripRoute(Document):
 
     def before_save(self):
         for d in self.get("trip_steps"):
-            if d.idx == 1 and d.location_type.lower() != "loading point":
+            if (
+                d and d.idx == 1 and hasattr(d, 'location_type') 
+                and d.location_type and d.location_type.lower() != "loading point"
+            ):
                 frappe.throw("Set 1st location type to LOADING POINT")
                 break
             if (
-                d.idx == len(self.get("trip_steps"))
+                d == len(self.get("trip_steps")) and d.location_type 
                 and d.location_type.lower() != "offloading point"
             ):
                 frappe.throw("Set last location type to OFFLOADING POINT")
