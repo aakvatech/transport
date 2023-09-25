@@ -20,7 +20,7 @@ class TripRoute(Document):
                 frappe.throw("Set 1st location type to LOADING POINT")
                 break
             if (
-                d == len(self.get("trip_steps")) and d.location_type 
+                d and d.idx == len(self.get("trip_steps")) and d.location_type 
                 and d.location_type.lower() != "offloading point"
             ):
                 frappe.throw("Set last location type to OFFLOADING POINT")
